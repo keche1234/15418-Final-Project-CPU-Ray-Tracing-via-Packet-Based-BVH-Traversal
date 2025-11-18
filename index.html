@@ -89,6 +89,54 @@ vs. vector width).
 • Highlight speedup metrics (OpenMP vs. OpenMP+ISPC)
     </pre>
 
+
+
+
+<h2>Milestone Goals</h2>
+<pre>
+50% Goal — Functional Baseline
+- Implement a correct single threaded ray–box intersection kernel in C++ BVH.
+- Build a test harness that measures throughput.
+- Document baseline performance.
+
+75% Goal — Basic Parallel Speedup
+- Add OpenMP parallel for over rays/packets.
+- Add a basic ISPC kernel for ray box intersections (4–16-wide SIMD).
+- Integrate ISPC into the C++ driver.
+- Target: 2–4× speedup vs baseline.
+
+100% Goal — Full Optimization (Core Deliverable)
+- Tune ISPC kernels and OpenMP scheduling.
+- Convert AoS → SoA memory layout.
+- Profile and optimize BVH traversal.
+- Target: 5–10× speedup vs baseline.
+
+125% Goal — Advanced Optimizations
+- Ray sorting/packetization (e.g., Morton order).
+- Manual prefetching, cache-blocking, alignment.
+- Target: 10–15× speedup.
+
+150% Goal 
+- Hybrid ISPC + OpenMP pipelined work queues or task-based parallelism.
+- Wide packet tracing, NUMA-aware scheduling.
+- Target: 15–20×+ speedup and polished visual demo.
+
+Team Split 
+- Ashley (ISPC & SIMD lead)
+  • Baseline C++ kernel, ISPC kernel design, SoA layout, SIMD tuning, final profiling.
+- Partner (OpenMP & systems lead)
+  • OpenMP integration, scheduling/NUMA tuning, profiling harness, evaluation/plots.
+- Shared
+  • Debugging, report, slides
+
+Which Steps Include Parallelism?
+- 50%: NO (serial baseline for comparison).
+- 75%: YES (basic OpenMP + naive ISPC).
+- 100%: YES (full OpenMP + tuned ISPC).
+- 125%: YES (advanced parallel optimizations).
+- 150%: YES (architecture-level parallelism).
+</pre>
+
     
 </body>
 </html>

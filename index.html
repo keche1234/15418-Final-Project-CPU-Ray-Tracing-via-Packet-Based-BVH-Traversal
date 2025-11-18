@@ -60,13 +60,13 @@ ing.
 3
 • Compare single-threaded vs. OpenMP performance.
 • Debug thread safety issues in image buffer updates.
-• Introduce ISPC for fine-grained SIMD acceleration within each packet.
+• Introduce ISPC for fine grained SIMD acceleration within each packet.
 • Vectorize BVH intersection and shading routines for packets.
 • Test correctness and compare to scalar implementation.
 • Tune packet size for optimal SIMD performance (balance coherence
 vs. vector width).
 • Optimize memory layout for cache efficiency (SoA vs. AoS).
-• Profile OpenMP+ISPC implementation.
+• Profile OpenMP + ISPC implementation.
 3. Week 3 (Intermediate Milestone Deadline)
 • Prepare an intermediate report / demo.
 • Show:
@@ -81,7 +81,7 @@ vs. vector width).
 • Generate benchmark comparisons: single-threaded, OpenMP, OpenMP+ISPC.
 • Prepare visual demo scenes for final deliverable.
 4. Final Days
-• Polish code and documentation.
+• Final touches to code and documentation.
 • Focus on finishing final deliverable.
 • Test on target machine to verify reproducibility and performance.
 • Final run of packet-based path tracer.
@@ -92,31 +92,30 @@ vs. vector width).
 
 <h2>Milestone Goals</h2>
 <pre>
-50% Goal — Functional Baseline
-- Implement a correct single threaded ray–box intersection kernel in C++ BVH.
+50% Goal: Functional Baseline
+- Implement a correct single threaded ray–box intersection kernel in C++ BVH for baseline performance.
 - Build a test harness that measures throughput.
-- Document baseline performance.
 
-75% Goal — Basic Parallel Speedup
+75% Goal: Basic Parallel Speedup
 - Add OpenMP parallel for over rays/packets.
-- Add a basic ISPC kernel for ray box intersections .
-- Integrate ISPC into the C++ driver.
+- Add a basic ISPC kernel for ray box intersections.
+- Integrate ISPC into the driver.
 - Target: 2–4× speedup vs baseline.
 
-100% Goal — Full Optimization (Core Deliverable)
+100% Goal: Full Optimization (Core Deliverable)
 - Tune ISPC kernels and OpenMP scheduling.
-- Convert AoS → SoA memory layout.
+- Convert array of structures to structure of arrays memory layout.
 - Profile and optimize BVH traversal.
 - Target: 5–10× speedup vs baseline.
 
-125% Goal — Advanced Optimizations
+125% Goal: Advanced Optimizations
 - Ray sorting/packetization (e.g., Morton order).
 - Manual prefetching, cache-blocking, alignment.
 - Target: 10–15× speedup.
 
 150% Goal 
-- Hybrid ISPC + OpenMP pipelined work queues or task-based parallelism.
-- Wide packet tracing, NUMA-aware scheduling.
+- Hybrid ISPC + OpenMP pipelined work queues or task based parallelism.
+- Wide packet tracing, NUMA aware scheduling.
 - Target: 15–20×+ speedup and polished visual demo.
 
 </pre>
@@ -131,22 +130,22 @@ vs. vector width).
 
 - Stage 2: Initial Parallelism
   • Together integrate OpenMP parallel for and test multicore scaling.
-  • Collaborate on writing basic ISPC kernels and verifying SIMD correctness.
+  • Write basic ISPC kernels and verifying SIMD correctness.
 
 - Stage 3: Full Parallel Optimization
-  • Jointly profile the code  and identify hotspots.
-  • Co optimize data layout, memory access, cache locality, and scheduling.
-  • Tune ISPC vector width, OpenMP scheduling, and BVH traversal together.
+  • Jointly profile the code and identify hotspots.
+  • Optimize data layout, memory access, cache locality, and scheduling.
+  • Try different ISPC vector widths, OpenMP scheduling, and BVH traversal together.
 
 - Stage 4: Advanced Optimization
-  • Implement ray sorting, packet coherence improvements, and divergence reduction as a team.
-  • Add prefetching, alignment, and micro architecture optimizations collaboratively.
+  • Implement ray sorting, packet coherence improvements, and branch divergence reduction.
+  • Add prefetching and architecture.
 
-- Stage 5: Stretch / Competition Goal
-  • Jointly build hybrid ISPC + OpenMP pipelines or task-based parallelism.
+- Stage 5: Stretch 
+  • Jointly build hybrid ISPC + OpenMP pipelines or task based parallelism.
   • Collaborate on polishing the final demo for the parallelism competition.
 
-Shared Non-Technical Responsibilities
+Shared Non Technical Responsibilities
 - Both contribute equally to weekly schedule updates.
 - Both contribute equally to the final report and slides.
 - Both participate in testing, debugging, benchmarking, and visualization.

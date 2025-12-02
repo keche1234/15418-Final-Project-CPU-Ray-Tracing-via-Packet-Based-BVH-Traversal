@@ -15,10 +15,10 @@
     <h3>Ashley Czumak (aczumak) and Kenechukwu Echezona (kechezon)</h3>
     
     <h2>Summary</h2>
-    <p>We plan to implement a packet based path tracer in Scotty3D, parallelizing the work with OpenMP for coarse grained threading across multiple CPU cores and ISPC for fine grained SIMD acceleration within ray packets. Our implementation will traverse a Bounding Volume Hierarchy (BVH) tree, reducing redundant intersection tests and improving cache coherence. We plan to demonstrate rendering of scenes with multiple light ray bounces and soft shadows, comparing performance between single threaded, OpenMP only, and OpenMP and ISPC versions on a multi-core CPU machine.</p>
+    <p>We plan to implement a packet based path tracer in Scotty3D, parallelizing the work with OpenMP for coarse grained threading across multiple CPU cores, and ISPC for fine grained SIMD acceleration within ray packets. Our implementation will traverse a Bounding Volume Hierarchy (BVH) tree, reducing redundant intersection tests and improving cache coherence. We plan to demonstrate rendering of scenes with multiple light ray bounces and soft shadows, comparing performance between single threaded, OpenMP only, and OpenMP and ISPC versions on a multi-core CPU machine.</p>
 
     <h2>Background</h2>
-    <p>Our project parallelizes path tracing in Scotty3D, a renderer that computes pixel colors by simulating light transport through a scene. The main data structure includes a Bounding Volume Hierarchy (BVH), which organizes scene geometry hierarchically using bounding boxes, and ray packets, which store groups of rays for coherent traversal. The primary operations on these structures are ray BVH intersection tests and ray triangle intersection tests, performed through the tree until leaf nodes are reached. The computationally expensive portion is the traversal of the BVH and intersection testing for millions of rays per frame, which is highly amenable to parallelization because each ray (or packet of rays) can be traced independently. The workload is broken down into packets of pixels, with dependencies only occurring when updating the final image buffer, which can be managed safely using atomic operations. This shows coarse grained data parallelism across packets for multi core execution via OpenMP, and fine grained SIMD parallelism within packets using ISPC. Ray packets improve memory locality because coherent rays traverse similar nodes in the BVH, which cache misses. Overall, the algorithm has high parallelism, is largely data parallel, 
+    <p>Our project parallelizes path tracing in Scotty3D, a graphics renderer from the CMU course 15-362: Computer Graphics, that computes pixel colors by simulating light transport through a scene. The main data structure includes a Bounding Volume Hierarchy (BVH), which organizes scene geometry hierarchically using bounding boxes, and ray packets, which store groups of rays for coherent traversal. The primary operations on these structures are ray BVH intersection tests and ray triangle intersection tests, performed through the tree until leaf nodes are reached. The computationally expensive portion is the traversal of the BVH and intersection testing for millions of rays per frame, which is highly amenable to parallelization because each ray (or packet of rays) can be traced independently. The workload is broken down into packets of pixels, with dependencies only occurring when updating the final image buffer, which can be managed safely using atomic operations. This shows coarse grained data parallelism across packets for multi core execution via OpenMP, and fine grained SIMD parallelism within packets using ISPC. Ray packets improve memory locality because coherent rays traverse similar nodes in the BVH, which cache misses. Overall, the algorithm has high parallelism, is largely data parallel, 
         and is ideal for SIMD execution because of the uniform operations performed across rays in a packet.</p>
     
     
@@ -57,7 +57,7 @@ provements.
 2. Week 2
 • Complete OpenMP integration and test multi-threaded packet trac-
 ing.
-3
+3. 
 • Compare single-threaded vs. OpenMP performance.
 • Debug thread safety issues in image buffer updates.
 • Introduce ISPC for fine grained SIMD acceleration within each packet.
@@ -68,6 +68,7 @@ vs. vector width).
 • Optimize memory layout for cache efficiency (SoA vs. AoS).
 • Profile OpenMP + ISPC implementation.
 3. Week 3 (Intermediate Milestone Deadline)
+• Edit Scotty3D GUI to support Packet Trace Functionality
 • Prepare an intermediate report / demo.
 • Show:
 – Basic packet tracing working
@@ -96,36 +97,39 @@ vs. vector width).
 - Implement a correct single threaded ray–box intersection kernel in C++ BVH for baseline performance.
 - Build a test harness that measures throughput.
 
-75% Goal: Basic Parallel Speedup
-- Add OpenMP parallel for over rays/packets.
-- Add a basic ISPC kernel for ray box intersections.
+75% Goal: Basic Parallel Speedup via OpenMP
+- Integrate OpenMP parallelization over ray packets in relevant areas (ray bounces and light computation).
+- Add a basic ISPC kernel for ray box intersections (BVH traversal), and support ISPC option in Scotty3D Software
 - Integrate ISPC into the driver.
 - Target: 2–4× speedup vs baseline.
 
 100% Goal: Full Optimization (Core Deliverable)
 - Tune ISPC kernels and OpenMP scheduling.
-- Convert array of structures to structure of arrays memory layout.
+- Compare array of structures to structure of arrays memory layout.
 - Profile and optimize BVH traversal.
 - Target: 5–10× speedup vs baseline.
 
 125% Goal: Advanced Optimizations
-- Ray sorting/packetization (e.g., Morton order).
 - Manual prefetching, cache-blocking, alignment.
-- Target: 10–15× speedup.
+- Target: 10–12× speedup.
 
-150% Goal 
+150% Goal
+- Ray sorting/packetization (e.g., Morton order).
+- Target: 12–15× speedup.
+    
+<!--150% Goal 
 - Hybrid ISPC + OpenMP pipelined work queues or task based parallelism.
 - Wide packet tracing, NUMA aware scheduling.
-- Target: 15–20×+ speedup and polished visual demo.
+- Target: 15–20×+ speedup and polished visual demo.-->
 
 </pre>
 
 <h2>Team Division</h2>
 <pre>
-    Both Members Collaborate on Every Stage
+    Both members collaborated on the first two stages, but Ashley Czumak had to leave the project due to health reasons.
 
 - Stage 1: Baseline Implementation
-  • Work together on building the serial BVH traversal and ray box/triangle intersection.
+  • Work together on testing the serial BVH traversal and ray box/triangle intersection.
   • Jointly design ray packet data structures and test correctness.
 
 - Stage 2: Initial Parallelism
@@ -144,11 +148,6 @@ vs. vector width).
 - Stage 5: Stretch 
   • Jointly build hybrid ISPC + OpenMP pipelines or task based parallelism.
   • Collaborate on polishing the final demo for the parallelism competition.
-
-Shared Non Technical Responsibilities
-- Both contribute equally to weekly schedule updates.
-- Both contribute equally to the final report and slides.
-- Both participate in testing, debugging, benchmarking, and visualization.
 
 </pre>
     

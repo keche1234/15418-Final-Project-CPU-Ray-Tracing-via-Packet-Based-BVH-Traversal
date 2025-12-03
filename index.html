@@ -70,7 +70,7 @@ ing.
 4. Final Days
 • Introduce ISPC for fine grained SIMD acceleration within each packet.
 vs. vector width).
-• Optimize memory layout for cache efficiency (SoA vs. AoS).
+<!--• Optimize memory layout for cache efficiency (SoA vs. AoS).-->
 • Profile OpenMP + ISPC implementation.
 • Verify performance improvements on benchmark scenes.
 • Vectorize BVH intersection and shading routines for packets.
@@ -99,24 +99,23 @@ vs. vector width).
 
 75% Goal: Basic Parallel Speedup via OpenMP
 - Integrate OpenMP parallelization over base sequential implementation
-
-- Add a basic ISPC kernel for ray box intersections (BVH traversal), and support ISPC option in Scotty3D Software
-
-100% Goal: Polished OpenMP Implementation (Core Deliverable)
-- Integrate OpenMP parallelization over ray packets in relevant areas (ray bounces and light computation).
-- Edit Scotty3D Application to support Path Tracing Parallelization Options in GUI (none, OpenMP over single rays, OpenMP over packets, OpenMP + ISPC over packets)
 - Target: 2–4× speedup vs baseline.
 
+100% Goal: Full Optimization (Core Deliverable)
+- Add a basic ISPC kernel for ray box intersections (BVH traversal), and support ISPC option in Scotty3D Software
+- Integrate OpenMP parallelization over ray packets in relevant areas (ray bounces and light computation).
+- Edit Scotty3D Application to support Path Tracing Parallelization Options in GUI (none, OpenMP over single rays, OpenMP over packets, OpenMP + ISPC over packets)
+- Target: 5–8× speedup vs baseline.
+
 125% Goal: Full Optimization
-- Implement basic ISPC driver
 - Tune ISPC kernels and OpenMP scheduling.
-- Compare array of structures to structure of arrays memory layout.
-- Target: 5–10× speedup vs baseline.
+- Profile and optimize BVH traversal.
+- Target: 8–10× speedup.
 
 150% Goal: Advanced Optimizations
-- Profile and optimize BVH traversal.
+- Compare array of structures to structure of arrays memory layout.
 - Manual prefetching, cache-blocking, alignment.
-- Target: 10–12× speedup.
+- Target: 10–15× speedup.
 
 <!-- 100% Goal: Full Optimization (Core Deliverable)
 - Tune ISPC kernels and OpenMP scheduling.

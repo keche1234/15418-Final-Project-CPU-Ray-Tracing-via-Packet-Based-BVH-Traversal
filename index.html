@@ -98,12 +98,13 @@ vs. vector width).
 - Build a test harness that measures throughput.
 
 75% Goal: Basic Parallel Speedup via OpenMP
-- Integrate OpenMP parallelization over ray packets in relevant areas (ray bounces and light computation).
+- Integrate OpenMP parallelization over base sequential implementation
+
 - Add a basic ISPC kernel for ray box intersections (BVH traversal), and support ISPC option in Scotty3D Software
 
 100% Goal: Polished OpenMP Implementation (Core Deliverable)
-- Fix bugs in OpenMP implementation
-- Edit Scotty3D Application to support Packet Tracing Option
+- Integrate OpenMP parallelization over ray packets in relevant areas (ray bounces and light computation).
+- Edit Scotty3D Application to support Path Tracing Parallelization Options in GUI (none, OpenMP over single rays, OpenMP over packets, OpenMP + ISPC over packets)
 - Target: 2–4× speedup vs baseline.
 
 125% Goal: Full Optimization

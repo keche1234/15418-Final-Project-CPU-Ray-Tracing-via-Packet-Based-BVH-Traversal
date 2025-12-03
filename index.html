@@ -56,35 +56,35 @@ provements.
 • Begin implementing OpenMP parallelization across packets.
 2. Week 2
 • Complete OpenMP integration and test multi-threaded packet trac-
-ing.
-3. 
+ing. 
 • Compare single-threaded vs. OpenMP performance.
 • Debug thread safety issues in image buffer updates.
-• Introduce ISPC for fine grained SIMD acceleration within each packet.
-• Vectorize BVH intersection and shading routines for packets.
-• Test correctness and compare to scalar implementation.
-• Tune packet size for optimal SIMD performance (balance coherence
-vs. vector width).
-• Optimize memory layout for cache efficiency (SoA vs. AoS).
-• Profile OpenMP + ISPC implementation.
 3. Week 3 (Intermediate Milestone Deadline)
-• Edit Scotty3D GUI to support Packet Trace Functionality
+• Update Scotty3D GUI to support Packet Trace Functionality
+• Debug OpenMP Implementation
 • Prepare an intermediate report / demo.
 • Show:
 – Basic packet tracing working
 – OpenMP speedup
 – ISPC vectorization in progress
+4. Final Days
+• Introduce ISPC for fine grained SIMD acceleration within each packet.
+vs. vector width).
+• Optimize memory layout for cache efficiency (SoA vs. AoS).
+• Profile OpenMP + ISPC implementation.
 • Verify performance improvements on benchmark scenes.
+• Vectorize BVH intersection and shading routines for packets.
+• Test correctness and compare to scalar implementation.
+<!-- • Tune packet size for optimal SIMD performance (balance coherence)
 • Address performance bottlenecks identified in milestone demo.
 • Implement any remaining shading or bounce logic.
 • Ensure correctness for complex scenes.
-• Final profiling and optimization.
+• Final profiling and optimization.-->
 • Generate benchmark comparisons: single-threaded, OpenMP, OpenMP+ISPC.
 • Prepare visual demo scenes for final deliverable.
-4. Final Days
 • Final touches to code and documentation.
-• Focus on finishing final deliverable.
-• Test on target machine to verify reproducibility and performance.
+<!--• Focus on finishing final deliverable.
+• Test on target machine to verify reproducibility and performance.-->
 • Final run of packet-based path tracer.
 • Showcase the real-time or accelerated rendering of complex scenes.
 • Highlight speedup metrics (OpenMP vs. OpenMP+ISPC)
@@ -100,10 +100,24 @@ vs. vector width).
 75% Goal: Basic Parallel Speedup via OpenMP
 - Integrate OpenMP parallelization over ray packets in relevant areas (ray bounces and light computation).
 - Add a basic ISPC kernel for ray box intersections (BVH traversal), and support ISPC option in Scotty3D Software
-- Integrate ISPC into the driver.
+
+100% Goal: Polished OpenMP Implementation (Core Deliverable)
+- Fix bugs in OpenMP implementation
+- Edit Scotty3D Application to support Packet Tracing Option
 - Target: 2–4× speedup vs baseline.
 
-100% Goal: Full Optimization (Core Deliverable)
+125% Goal: Full Optimization
+- Implement basic ISPC driver
+- Tune ISPC kernels and OpenMP scheduling.
+- Compare array of structures to structure of arrays memory layout.
+- Target: 5–10× speedup vs baseline.
+
+150% Goal: Advanced Optimizations
+- Profile and optimize BVH traversal.
+- Manual prefetching, cache-blocking, alignment.
+- Target: 10–12× speedup.
+
+<!-- 100% Goal: Full Optimization (Core Deliverable)
 - Tune ISPC kernels and OpenMP scheduling.
 - Compare array of structures to structure of arrays memory layout.
 - Profile and optimize BVH traversal.
@@ -117,7 +131,7 @@ vs. vector width).
 - Ray sorting/packetization (e.g., Morton order).
 - Target: 12–15× speedup.
     
-<!--150% Goal 
+150% Goal 
 - Hybrid ISPC + OpenMP pipelined work queues or task based parallelism.
 - Wide packet tracing, NUMA aware scheduling.
 - Target: 15–20×+ speedup and polished visual demo.-->
@@ -126,7 +140,7 @@ vs. vector width).
 
 <h2>Team Division</h2>
 <pre>
-    Both members collaborated on the first two stages, but Ashley Czumak had to leave the project due to health reasons.
+    Both members collaborated during the first two stages, but Ashley Czumak had to leave the project due to health reasons.
 
 - Stage 1: Baseline Implementation
   • Work together on testing the serial BVH traversal and ray box/triangle intersection.

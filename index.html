@@ -172,12 +172,20 @@ We’ve developed a Ray Packet data structure, and studied the Scotty3D base cod
 we might best utilize OpenMP and ISPC (the former to parallelize across the Ray Packets, and ISPC for BVH
 navigation within a Ray Packet, respectively). We also figured out how to edit the application itself to support our
 Parallel Packet Tracer as an option.
+
+<img src="images/milestone_threads.png" alt="Setting OpenMP thread count">  <img src="images/milestone_packets.png" alt="Enabling packets (requires BVHs to be used)">
+Figure 1: New additions to the render window, edited in via widgets.cpp. Ray packets are specifically used for
+BVH navigation, so the packet option only appears when the “Use BVH” option is selected.
     
 <h3>Where I Am</h3>
 I have a code skeleton of the appropriate areas for parallelization, which methods to overload, and which to create
 new versions of to support parallelization. We had tested our Ray Packet structure via a sequential structure and
 got near identical results.
 
+<img src="images/cbox-spheres-regular.png" alt="Provided implementation"> <img src="images/cbox-spheres-seq-packets.png" alt="Sequential using Ray Pakets">
+Figure 2: Left: Rendering A3-cbox-spheres.js3d using the sequential Ray implementation. Right: Rendering the
+same file using the sequential RayPacket structure.
+    
 <h3>Final Submission</h3>
 In addition to the GitHub link for the Scotty3D code itself (which must only be shared with the graders due to
 this being based off of a submission from another class), the final submission will consist of (1) a visual, qualitative
@@ -194,16 +202,6 @@ on 16-bit values). If the OldFiles repository clears up, then I’ll be able to 
 repository and see if I can get the window to open through the GHC Clusters.
     
 </pre>
-
-<img src="images/milestone_threads.png" alt="Setting OpenMP thread count"> 
-<img src="images/milestone_packets.png" alt="Enabling packets (requires BVHs to be used)">
-Figure 1: New additions to the render window, edited in via widgets.cpp. Ray packets are specifically used for
-BVH navigation, so the packet option only appears when the “Use BVH” option is selected.
-
-<img src="images/cbox-spheres-regular.png" alt="Provided implementation"> 
-<img src="images/cbox-spheres-seq-packets.png" alt="Sequential using Ray Pakets">
-Figure 2: Left: Rendering A3-cbox-spheres.js3d using the sequential Ray implementation. Right: Rendering the
-same file using the sequential RayPacket structure.
     
 </body>
 </html>
